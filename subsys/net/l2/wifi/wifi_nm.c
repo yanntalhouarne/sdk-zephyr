@@ -23,8 +23,8 @@ struct wifi_nm_instance *wifi_nm_get_instance(const char *name)
 
 struct wifi_nm_instance *wifi_nm_get_instance_iface(struct net_if *iface)
 {
-	if (!iface || !net_if_is_wifi(iface)) {
-		return false;
+	if (!iface || iface->if_dev->dev != DEVICE_DT_GET(DT_NODELABEL(nrf_wlan0))) {
+		return NULL;
 	}
 
 	STRUCT_SECTION_FOREACH(wifi_nm_instance, nm) {
