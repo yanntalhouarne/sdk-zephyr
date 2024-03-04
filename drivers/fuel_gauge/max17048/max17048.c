@@ -257,7 +257,7 @@ static int max17048_get_props(const struct device *dev, struct fuel_gauge_get_pr
 
 		data->time_to_empty = 0;
 		data->time_to_full = hours_pending * 60 / 1000;
-	} else {
+	} else if (data->charging < 0) {
 		/* Discharging */
 		uint32_t hours_pending = data->charge * 1000000 / -crate;
 
